@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  S617 PORTFOLIO TEMPLATE
+  How to use: edit every spot marked  <!-- EDIT: ... -- >  below.
+  You do NOT need to touch the <style> block unless you want to change
+  the look. Feel free to use your favorit ai to edit or modify. 
+  When you're done, commit this file to your `username.github.io`
+  repo and enable GitHub Pages (Settings -> Pages -> Source: main).
+  =====================================================================
+-->
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- EDIT: your name in the browser tab title -->
+  <title>Your Name - Cybersecurity Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --surface: #111822;
+      --surface-border: #1e2d3d;
+      --text-main: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #00ff66; /* Neon Terminal Green */
+      --accent-cyan: #00f0ff; /* Cyber Cyan */
+      --accent-alert: #ff0055;
+      --line: #1f2937;
+      --font-mono: "Fira Code", monospace;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 255, 102, 0.05) 0%, transparent 70%),
+        linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+      background-size: 100% 100%, 100% 4px; /* Subtle CRT scanline effect */
+    }
+
+    .wrap {
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) 1.5rem;
+    }
+
+    /* ---- Links & Glows ---- */
+    a { 
+      color: var(--accent-cyan); 
+      text-decoration: none; 
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    a:hover { 
+      color: var(--accent); 
+      text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+    }
+    a:focus-visible { 
+      outline: 2px solid var(--accent); 
+      outline-offset: 3px; 
+      border-radius: 2px; 
+    }
+
+    /* ---- Terminal Banner / Header ---- */
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: #161b22;
+      border: 1px solid var(--surface-border);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 0 0 8px 8px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .hero .prompt {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+      color: var(--text-main);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .hero .role {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--accent-cyan);
+      font-size: 1rem;
+      margin: 0 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--accent);
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero .lede { 
+      color: var(--text-muted); 
+      max-width: 36rem; 
+      margin: 0 0 1.75rem; 
+    }
+
+    .contacts { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 1rem; 
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+    }
+
+    .contacts a {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+    }
+
+    .contacts a:hover {
+      background: rgba(0, 255, 102, 0.1);
+      border-color: var(--accent);
+    }
+
+    /* ---- Sections ---- */
+    section { margin-top: 3.5rem; }
+
+    h2 {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2::before {
+      content: ">";
+      color: var(--accent-cyan);
+    }
+
+    h2::after {
+      content: "";
+      flex-grow: 1;
+      height: 1px;
+      background: var(--line);
+      margin-left: 0.5rem;
+    }
+
+    p { margin: 0 0 1rem; color: var(--text-muted); }
+
+    /* ---- Skills Tags ---- */
+    .tags { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.6rem; 
+      padding: 0; 
+      margin: 0; 
+      list-style: none; 
+      font-family: var(--font-mono);
+    }
+
+    .tags li {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 4px;
+      padding: 0.35rem 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .tags li:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    /* ---- Findings / Work Section ---- */
+    .entry { 
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 0 6px 6px 0;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .entry:hover {
+      transform: translateX(4px);
+      border-left-color: var(--accent);
+    }
+
+    .entry h3 { 
+      font-family: var(--font-mono); 
+      font-weight: 600; 
+      font-size: 1.1rem; 
+      margin: 0 0 0.5rem; 
+      color: var(--text-main);
+    }
+
+    .entry p { 
+      font-size: 0.95rem;
+      margin: 0 0 0.8rem; 
+    }
+
+    .entry .meta { 
+      font-family: var(--font-mono);
+      font-size: 0.85rem; 
+      color: var(--text-muted); 
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .entry .meta span { 
+      color: var(--accent-cyan); 
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="terminal-bar">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span>sec-ops@portfolio:~</span>
+    </div>
+
+    <header class="hero">
+      <div class="prompt">root@soc-analyst:~# whoami</div>
+      <!-- EDIT: your name -->
+      <h1>Your Name</h1>
+      
+      <!-- EDIT: your focus / status -->
+      <div class="role">
+        <span>Cybersecurity Student // Aspiring SOC Analyst</span>
+        <span class="status-badge">Ready to Defend</span>
+      </div>
+
+      <!-- EDIT: your intro sentence -->
+      <p class="lede">
+        Cybersecurity student at Hudson County Community College building hands-on
+        skills in network defense and threat detection. I document everything I build.
+      </p>
+
+      <nav class="contacts" aria-label="Contact links">
+        <!-- EDIT: your links -->
+        <a href="https://github.com/your-username" target="_blank">[GitHub]</a>
+        <a href="https://www.linkedin.com/in/your-handle" target="_blank">[LinkedIn]</a>
+        <a href="mailto:your-dedicated-email@example.com">[Email]</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>About_Me</h2>
+        <!-- EDIT: short overview -->
+        <p>
+          I'm in my second year of the cybersecurity program at HCCC, where I work
+          through labs in the S617 lab and turn each one into a documented writeup.
+          I'm most interested in defensive security - reading logs, spotting anomalies,
+          and understanding how attacks actually unfold so I can stop them.
+        </p>
+      </section>
+
+      <section id="skills">
+        <h2>System_Capabilities</h2>
+        <!-- EDIT: skills list -->
+        <ul class="tags">
+          <li>Linux</li>
+          <li>Python</li>
+          <li>Bash</li>
+          <li>Wireshark</li>
+          <li>nmap</li>
+          <li>Git &amp; GitHub</li>
+          <li>Networking</li>
+        </ul>
+      </section>
+
+      <section id="work">
+        <h2>Incident_Reports &amp; Labs</h2>
+
+        <!-- EDIT: project block -->
+        <article class="entry">
+          <h3>Network Reconnaissance Lab</h3>
+          <p>
+            Mapped an isolated lab network with nmap, identified open services, and wrote
+            up the findings and how I'd remediate them.
+          </p>
+          <div class="meta">
+            <span>TOOLS:</span> nmap, Wireshark &nbsp;·&nbsp;
+            <a href="https://github.com/your-username/your-writeup-repo" target="_blank">View Writeup &rarr;</a>
+          </div>
+        </article>
+
+        <article class="entry">
+          <h3>Web Vulnerability Report</h3>
+          <p>
+            Assessed an intentionally vulnerable web app, documented each finding with a
+            severity rating, evidence, and a mitigation.
+          </p>
+          <div class="meta">
+            <span>TOOLS:</span> Burp Suite &nbsp;·&nbsp;
+            <a href="https://github.com/your-username/your-writeup-repo" target="_blank">View Writeup &rarr;</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <!-- Keep this line -->
+      Built as part of the Cybersecurity Lab (S617) at Hudson County Community College.
+    </footer>
+
+  </div>
+</body>
+</html>
